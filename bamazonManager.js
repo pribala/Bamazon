@@ -32,8 +32,14 @@ inquirer
       		case "View Low Inventory":
       			listLowInventory();
       			break;	
+      		case "Add to Inventory":
+      			addInventory();
+      			break;
+      		case "Add New Product":
+      			addProduct();
+      			break;		
       		default:
-      			console.log("nothing");
+      			listItems();
       			break;	
       	}
     });
@@ -64,5 +70,63 @@ inquirer
 	    		console.log("Id: "+ item.item_id + " || Name: " + item.product_name + " || Quantity: "+item.stock_quantity);
 	    	});
     	});	
+    }
+
+    function addInventory() {
+
+    }
+
+    function addProduct() {
+    	inquirer
+    		.prompt([{
+      			name: "productName",
+      			type: "input",
+      			message: "Enter product name.",
+      			validate: function(value) {
+          			if (value === "") {
+            			console.log("Name cannot be null.");
+            			return false;
+          			}
+          		    return true;
+        		}
+        	},
+        	{
+				name: "department",
+				type: "input",
+				message: "Enter department name.",
+			},
+    		{
+				name: "price",
+				type: "input",
+				message: "Enter price.",
+				validate: function(value) {
+			        if (isNaN(value) === false) {
+			            return true;
+			        }
+			        console.log(" (Enter a valid number.)");
+			        return false;
+		        }
+    		},
+    		{
+				name: "quantity",
+				type: "input",
+				message: "Enter quantity.",
+				validate: function(value) {
+			        if (isNaN(value) === false) {
+			            return true;
+			        }
+			        console.log(" (Enter a valid number.)");
+			        return false;
+		        }
+    		}]).then(function(answer) {
+    			var newItem = {product_name: answer.productName,
+    				department_name: answer.department,
+    				price: parseFloat(answer.price),
+    				stock_quantity: parseInt(answer.quantity)};
+    			var query = connection.query("INSERT INTO products SET ?", newItem, function(err, res) {
+		      	if (err) throw err;
+		      		console.log(res.affectedRows + " product inserted!\n");
+		    	});	
+		   	});
     }
  
