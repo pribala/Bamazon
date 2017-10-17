@@ -39,12 +39,25 @@ connection.query('SELECT item_id, product_name, price FROM products', function (
     .prompt([{
       name: "id",
       type: "input",
-      message: "Enter the Id of the product you would like to purchase."
+      message: "Enter the Id of the product you would like to purchase.",
+      validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          //console.log("Enter a valid number.");
+          return false;
+        }
     },
     {
       name: "quantity",
       type: "input",
-      message: "Enter the quantity you would like to purchase."
+      message: "Enter the quantity you would like to purchase.",
+      validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
     }
     ]).then(function(answer) {
       updateQuantity(answer.id, answer.quantity);
@@ -73,7 +86,6 @@ function updateQuantity(id, quantity) {
         ],
         function(err, result) {
           if (err) throw err;
-          //console.log(quantity + " rows updated!\n");
           res.forEach(function(item){
             console.log("Total cost of purchase: "+ item.price*quantity);
           });
