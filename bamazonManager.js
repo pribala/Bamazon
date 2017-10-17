@@ -29,6 +29,9 @@ inquirer
       		case "View Products for Sale":
       			listItems();
       			break;
+      		case "View Low Inventory":
+      			listLowInventory();
+      			break;	
       		default:
       			console.log("nothing");
       			break;	
@@ -48,5 +51,18 @@ inquirer
 	    	console.log("Id: "+ item.item_id + " || Name: " + item.product_name +" || Price: $"+ item.price+" || Quantity: "+item.stock_quantity);
 	    });
 	   });  
+    }
+
+    function listLowInventory(){
+    	var query = "SELECT item_id, product_name, stock_quantity FROM products WHERE stock_quantity < 5";
+    	connection.query(query, function(err, res) {
+    		if(err) throw error;
+	    	console.log("\n=====================================================================\n");
+	    	console.log("Low Inventory");
+	    	console.log("----------------");
+	    	res.forEach(function(item){
+	    		console.log("Id: "+ item.item_id + " || Name: " + item.product_name + " || Quantity: "+item.stock_quantity);
+	    	});
+    	});	
     }
  
