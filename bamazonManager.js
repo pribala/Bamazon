@@ -39,7 +39,7 @@ inquirer
       			addProduct();
       			break;		
       		default:
-      			listItems();
+      			//listItems();
       			break;	
       	}
     });
@@ -73,7 +73,56 @@ inquirer
     }
 
     function addInventory() {
-
+    	console.log("Add more stock");
+    	console.log("---------------");
+    	inquirer
+    		.prompt([{
+      			name: "productId",
+      			type: "input",
+      			message: "Enter product id.",
+      			validate: function(value) {
+			        if (isNaN(value) === false) {
+			            return true;
+			        }
+			        console.log(" (Enter a valid number.)");
+			        return false;
+		        }
+        	},
+        	{
+				name: "quantity",
+				type: "input",
+				message: "Enter quantity to order.",
+				validate: function(value) {
+			        if (isNaN(value) === false) {
+			            return true;
+			        }
+			        console.log(" (Enter a valid number.)");
+			        return false;
+		        }
+			}]).then(function(answer) {
+				var itemQuantity = 0;
+				connection.query("SELECT stock_quantity FROM products WHERE item_id = ?", [parseInt(answer.productId)], function(err, res){
+					if(err) throw err;
+					itemQuantity = res[0].stock_quantity;
+					
+				});
+				console.log(itemQuantity);
+				var newQuantity = parseInt(itemQuantity) + parseInt(answer.quantity);
+				console.log(newQuantity);
+    			var query = connection.query("UPDATE products SET ? WHERE ?", 
+    				[
+				      {
+				        stock_quantity: parseInt(itemQuantity)+parseInt(answer.quantity)
+				      },
+				      {
+				        item_id: parseInt(answer.productId)
+				      }
+				    ],
+    			 function(err, res) {
+		      		if (err) throw err;
+		      		console.log(res.affectedRows + " product updated!\n");
+		    	});	
+			 });	
     }
 
     function addProduct() {
@@ -123,10 +172,10 @@ inquirer
     				department_name: answer.department,
     				price: parseFloat(answer.price),
     				stock_quantity: parseInt(answer.quantity)};
-    			var query = connection.query("INSERT INTO products SET ?", newItem, function(err, res) {
-		      	if (err) throw err;
+    			var query = ("INSERT INTO products SET ?", newItem, function(err, res) {
+		      		if (err) throw err;
 		      		console.log(res.affectedRows + " product inserted!\n");
 		    	});	
 		   	});
     }
- 
+
