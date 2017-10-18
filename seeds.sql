@@ -48,3 +48,28 @@
     (product_name, department_name, price, stock_quantity)
   VALUES
     ("The Honest Spy", "Books & Audible", 10.79, 4);
+
+INSERT INTO departments
+    (department_name, over_head_costs)
+  VALUES
+    ("Books & Audible", 10000);
+
+INSERT INTO departments
+    (department_name, over_head_costs)
+  VALUES
+    ("Health & Beauty", 20000);
+
+INSERT INTO departments
+    (department_name, over_head_costs)
+  VALUES
+    ("Food & Grocery", 15000);
+
+INSERT INTO departments
+    (department_name, over_head_costs)
+  VALUES
+    ("Sports & Outdoors", 50000);
+
+INSERT INTO departments
+    (department_name, over_head_costs)
+  VALUES
+    ("Electronics", 30000);

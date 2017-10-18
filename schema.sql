@@ -19,6 +19,21 @@ CREATE TABLE products
   price DECIMAL(10,2) NOT NULL,
   -- Makes an numeric column called "stock_quantity" --
   stock_quantity INTEGER(10),
+  -- Makes an numeric column called "product_sales" --
+  product_sales DECIMAL(10,2) DEFAULT 0,
   -- Sets item_id as this table's primary key which means all data contained within it will be unique --
   PRIMARY KEY(item_id)
+);
+
+-- Creates the table "departments" within bamazon
+CREATE TABLE departments
+(
+  -- Creates a numeric column called "department_id" which will automatically increment its default value as we create new rows --
+  department_id INTEGER(11) AUTO_INCREMENT NOT NULL,
+  -- Makes a string column called "department_name" which cannot contain null --
+  department_name VARCHAR (100) NOT NULL,
+  -- Makes a numeric column called "over_head_costs" --
+  over_head_costs DECIMAL(10,2) NOT NULL,
+  -- Sets department_id as this table's primary key which means all data  contained within it will be unique --
+  PRIMARY KEY(department_id)
 );

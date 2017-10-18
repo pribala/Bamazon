@@ -71,7 +71,7 @@ connection.query('SELECT item_id, product_name, price FROM products', function (
 }
 
 function updateQuantity(id, quantity) {
-  var query = "SELECT stock_quantity, price FROM products WHERE ?";
+  var query = "SELECT stock_quantity, price, product_sales FROM products WHERE ?";
   connection.query(query, { item_id: id }, function(err, res) {
     res.forEach(function(item){
       if(item.stock_quantity < quantity){
@@ -80,11 +80,14 @@ function updateQuantity(id, quantity) {
         connection.end(); 
       }else {
         var newQuantity = item.stock_quantity - quantity;
+        var total_sales = item.product_sales + (quantity * item.price);
+        console.log(total_sales);
         var query = "UPDATE products SET ? WHERE ?";
         connection.query(query,
         [
           {
-            stock_quantity: newQuantity
+            stock_quantity: newQuantity,
+            product_sales: total_sales
           },
           {
             item_id: id
@@ -96,10 +99,32 @@ function updateQuantity(id, quantity) {
             console.log("Your order has been placed!");
             console.log("Total cost of purchase: $"+ item.price*quantity);
           });
-          connection.end();  
+          displayProductById(id);
+          //connection.end();  
         });
       }  
     });  
   }); 
 }
 
+function displayProductById(id){
+  var table = new Table({
+      head: ['Item Id', 'Product Name', 'Total Sales']
+    , colWidths: [15, 65, 20]
+  }); 
+  
+connection.query('SELECT item_id, product_name, product_sales FROM products WHERE ?',{item_id: id}, function (error, results, fields) {
+  // error will be an Error if one occurred during the query
+  // results will contain the results of the query
+  // fields will contain information about the returned results fields (if any)
+  if(error) throw error;
+  console.log("Product Sale Details");
+  console.log("---------------------");
+  results.forEach(function(item){
+    //console.log("Id: "+ item.item_id + " || Name: " + item.product_name +" || Price: "+ item.price);
+    table.push([item.item_id, item.product_name, "$"+item.product_sales]);
+  });
+  console.log(table.toString());
+  connection.end();
+  });
+}
