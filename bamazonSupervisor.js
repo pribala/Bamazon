@@ -1,7 +1,9 @@
+// Import the required packages
 var mysql      = require('mysql');
 var inquirer = require("inquirer");
 var Table = require('cli-table');
  
+// Create database connection parameters 
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -10,12 +12,14 @@ var connection = mysql.createConnection({
   multipleStatements: true
 });
  
+// Connect to the database  
 connection.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
   }
 });
 
+// Display list of options
 inquirer
     .prompt([{
       name: "menu",
@@ -37,6 +41,7 @@ inquirer
         }
     });
 
+    // Display summary table
     function displaySummaryTable() {
       var table = new Table({
         head: ['Department Id', 'Department Name', 'Overhead Costs', 'Product Sales', 'Total Profit']
@@ -53,6 +58,7 @@ inquirer
       });
     }
 
+    // Create new department
     function createNewDepartment() {
       inquirer
         .prompt([{
@@ -89,6 +95,7 @@ inquirer
         });
     }
 
+    // List departments
     function listDepartments() {
       var table = new Table({
         head: ['Department Id', 'Department Name', 'Overhead Costs']

@@ -1,7 +1,9 @@
+// Import the required packages
 var mysql      = require('mysql');
 var inquirer = require("inquirer");
 var Table = require('cli-table');
 
+// Create database connection parameters
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -10,6 +12,7 @@ var connection = mysql.createConnection({
   multipleStatements: true
 });
  
+// Connect to the database 
 connection.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
@@ -17,6 +20,7 @@ connection.connect(function(err) {
   }
 });
 
+// Display list of options
 inquirer
     .prompt([{
       name: "menu",
@@ -40,11 +44,12 @@ inquirer
       			addProduct();
       			break;		
       		default:
-      			//listItems();
+      			listItems();
       			break;	
       	}
     });
 
+    // Display list of products
     function listItems() {
       var table = new Table({
         head: ['Item Id', 'Product Name', 'Price', 'Stock Quantity']
@@ -66,6 +71,7 @@ inquirer
 	   });  
     }
 
+    // Display products low on inventory
     function listLowInventory(){
       var table = new Table({
         head: ['Item Id', 'Product Name', 'Stock Quantity']
@@ -85,6 +91,7 @@ inquirer
     	});	
     }
 
+    // Add more inventory
     function addInventory() {
     	console.log("Add more stock");
     	console.log("---------------");
@@ -138,6 +145,7 @@ inquirer
       });  
     }
 
+    // Add new product
     function addProduct() {
     	inquirer
     		.prompt([{

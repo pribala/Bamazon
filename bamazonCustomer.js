@@ -1,7 +1,9 @@
+// Import the required packages
 var mysql      = require('mysql');
 var inquirer = require("inquirer");
 var Table = require('cli-table');
  
+// Create database connection parameters
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -10,6 +12,7 @@ var connection = mysql.createConnection({
   multipleStatements: true
 });
  
+// Connect to the database and display list of products
 connection.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
@@ -18,7 +21,7 @@ connection.connect(function(err) {
   displayProducts();
 });
 
-
+// Function displays list of all products 
 function displayProducts() {
   // instantiate table 
   var table = new Table({
@@ -80,7 +83,6 @@ function updateQuantity(id, quantity) {
       }else {
         var newQuantity = item.stock_quantity - quantity;
         var total_sales = item.product_sales + (quantity * item.price);
-        //console.log(total_sales);
         var query = "UPDATE products SET ? WHERE ?";
         connection.query(query,
         [
@@ -106,6 +108,7 @@ function updateQuantity(id, quantity) {
   }); 
 }
 
+//Function displays product filtered by id
 function displayProductById(id){
   var table = new Table({
       head: ['Item Id', 'Product Name', 'Total Sales']
