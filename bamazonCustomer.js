@@ -98,7 +98,7 @@ function updateQuantity(id, quantity) {
           if (err) throw err;
           res.forEach(function(item){
             console.log("Your order has been placed!");
-            console.log("Total cost of purchase: $"+ item.price*quantity);
+            console.log("Total cost of purchase: $"+ Math.round(item.price*quantity*100)/100);
           });
           displayProductById(id);
           //connection.end();  

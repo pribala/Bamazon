@@ -52,24 +52,24 @@
 INSERT INTO departments
     (department_name, over_head_costs)
   VALUES
-    ("Books & Audible", 10000);
+    ("Books & Audible", 100);
 
 INSERT INTO departments
     (department_name, over_head_costs)
   VALUES
-    ("Health & Beauty", 20000);
+    ("Beauty & Health", 200);
 
 INSERT INTO departments
     (department_name, over_head_costs)
   VALUES
-    ("Food & Grocery", 15000);
+    ("Food & Grocery", 150);
 
 INSERT INTO departments
     (department_name, over_head_costs)
   VALUES
-    ("Sports & Outdoors", 50000);
+    ("Sports & Outdoors", 500);
 
 INSERT INTO departments
     (department_name, over_head_costs)
   VALUES
-    ("Electronics", 30000);
+    ("Electronics", 300);

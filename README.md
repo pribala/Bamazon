@@ -4,6 +4,20 @@ An Amazon-like storefront using Node.js & MySQL
 
    The app takes in orders from customers and depletes stock from the    store's inventory. It also tracks product sales across store's    departments and provides a summary of the highest-grossing    departments in the store.
 
+### Video and Screenshots
+
+[http://recordit.co/Gc9l3AWTlj] 
+[http://g.recordit.co/ehAmRPtv6B.gif]
+[http://g.recordit.co/MIhGlsyHcD.gif]
+[http://g.recordit.co/o0hxkJdmHV.gif]
+[http://g.recordit.co/9I7H3yKWLW.gif]
+[http://g.recordit.co/LwhnO12GWc.gif]
+[http://g.recordit.co/MUbAsFmP5p.gif]
+[http://g.recordit.co/p3wWWACW0W.gif]
+[http://g.recordit.co/4KeKnfL59e.gif]
+[http://g.recordit.co/Kji4izwFIM.gif]
+[http://g.recordit.co/ihOzY0YM7Q.gif]
+
 ### Customer View
 
    Running this application first displays all of the items available    for sale.
