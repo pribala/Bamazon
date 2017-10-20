@@ -7,16 +7,27 @@ An Amazon-like storefront using Node.js & MySQL
 ### Video and Screenshots
 
 [http://recordit.co/Gc9l3AWTlj] 
+
 [http://g.recordit.co/ehAmRPtv6B.gif]
+
 [http://g.recordit.co/MIhGlsyHcD.gif]
+
 [http://g.recordit.co/o0hxkJdmHV.gif]
+
 [http://g.recordit.co/9I7H3yKWLW.gif]
+
 [http://g.recordit.co/LwhnO12GWc.gif]
+
 [http://g.recordit.co/MUbAsFmP5p.gif]
+
 [http://g.recordit.co/p3wWWACW0W.gif]
+
 [http://g.recordit.co/4KeKnfL59e.gif]
+
 [http://g.recordit.co/Kji4izwFIM.gif]
+
 [http://g.recordit.co/ihOzY0YM7Q.gif]
+
 
 ### Customer View
 
@@ -65,7 +76,7 @@ Running this application will list a set of menu options:
 
 When a supervisor selects View Product Sales by Department, the app     displays a summarized table in their terminal/bash window.
 
-The total_profit column is calculated on the fly using the difference    between over_head_costs and product_sales.
+The total_profit column is calculated on the fly using the difference    between over_head_costs and product_sales. A negative value indicates sales is less than overhead costs indicating a loss.
 
 ### Installation
 
