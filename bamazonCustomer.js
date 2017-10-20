@@ -13,7 +13,6 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
-    
   }
   // console.log('connected as id ' + connection.threadId);
   displayProducts();
@@ -81,7 +80,7 @@ function updateQuantity(id, quantity) {
       }else {
         var newQuantity = item.stock_quantity - quantity;
         var total_sales = item.product_sales + (quantity * item.price);
-        console.log(total_sales);
+        //console.log(total_sales);
         var query = "UPDATE products SET ? WHERE ?";
         connection.query(query,
         [

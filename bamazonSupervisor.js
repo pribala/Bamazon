@@ -42,7 +42,7 @@ inquirer
         head: ['Department Id', 'Department Name', 'Overhead Costs', 'Product Sales', 'Total Profit']
         , colWidths: [15, 30, 18, 15, 22]
       }); 
-      var query = 'SELECT department_id, department_name, over_head_costs, sales, (over_head_costs - sales) AS total_profit FROM (SELECT department_id, departments.department_name, over_head_costs, COALESCE(SUM(product_sales),0) AS sales FROM departments LEFT JOIN products ON departments.department_name = products.department_name GROUP BY departments.department_name) AS summary';
+      var query = 'SELECT department_id, department_name, over_head_costs, sales, (sales - over_head_costs) AS total_profit FROM (SELECT department_id, departments.department_name, over_head_costs, COALESCE(SUM(product_sales),0) AS sales FROM departments LEFT JOIN products ON departments.department_name = products.department_name GROUP BY departments.department_name) AS summary ORDER BY total_profit DESC';
       connection.query(query, function (error, results, fields) {
         if(error) throw error;
         results.forEach(function(item){
